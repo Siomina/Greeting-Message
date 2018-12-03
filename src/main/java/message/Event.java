@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,7 +31,8 @@ public class Event {
 
 	    public String getEvent() throws ParseException {
 
-	        Locale.getDefault();
+	        //Locale.getDefault();
+	    	Locale.setDefault(new Locale("ru", "RU"));
 			ResourceBundle res = ResourceBundle.getBundle("MessageResource");
 			
 	        current = dateFormat.parse(dateFormat.format(currentDate));
