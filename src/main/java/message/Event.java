@@ -31,8 +31,8 @@ public class Event {
 
 	    public String getEvent() throws ParseException {
 
-	        //Locale.getDefault();
-	    	Locale.setDefault(new Locale("ru", "RU"));
+	        Locale.getDefault();
+	    	//Locale.setDefault(new Locale("ru", "RU"));
 			ResourceBundle res = ResourceBundle.getBundle("MessageResource");
 			
 	        current = dateFormat.parse(dateFormat.format(currentDate));
