@@ -9,7 +9,7 @@ public class World {
 	    private static final Logger log = LogManager.getLogger(World.class.getName());
 
 	    public static void main(String[] args) {
-//commit
+
 	        Event event = new Event();
 	        String events = null;
 	        try{
