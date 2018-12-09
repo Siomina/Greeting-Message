@@ -1,56 +1,45 @@
 package message;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Event {
-	
 	    private static final Logger log = LogManager.getLogger(Event.class.getName());
-
-	    private static SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-	    private Date current;//текущий
-	    private Date morning;//утро
-	    private Date day;//день
-	    private Date evening;//вечер
-	    private Date night;//ночь
-	    private Date currentDate;//текущая дата
+	    private LocalTime now; 
+	    private String morning = "06:00";
+	    private String day = "09:00";
+	    private String evening = "19:00";
+	    private String night = "23:00";
 	    private String ress;
 
 	    public Event(){
-	        currentDate = new Date();
+	    	now = LocalTime.now();
 	    }
 
-	    public Event(String event) throws ParseException{
-	        currentDate = dateFormat.parse(event);
+	    public Event(String time) throws ParseException{
+	    	now = LocalTime.parse(time);
 	    }
 
 	    public String getEvent() throws ParseException {
 
 	    	Locale.getDefault();
 			ResourceBundle res = ResourceBundle.getBundle("MessageResource");
-			
-	        current = dateFormat.parse(dateFormat.format(currentDate));
-	        morning  = dateFormat.parse(BorderEvent.MORNING.toString());
-	        day  = dateFormat.parse(BorderEvent.DAY.toString());
-	        evening = dateFormat.parse(BorderEvent.EVENING.toString());
-	        night = dateFormat.parse(BorderEvent.NIGHT.toString());
-
-	        if(current.after(morning) && current.before(day) || current.equals(morning) ){
+	
+	        if(now.isAfter(LocalTime.parse(morning)) && now.isBefore(LocalTime.parse(day)) || now.equals(morning) ){
 	            ress = res.getString("morning");
 	            log.info(ress);
 	            return ress;
 	        }
-	        else if (current.after(day) && current.before(evening) || current.equals(day)){
+	        else if (now.isAfter(LocalTime.parse(day)) && now.isBefore(LocalTime.parse(evening)) || now.equals(day)){
 	            ress = res.getString("day");
 	            log.info(ress);
 	            return ress;
 	        }
-	        else if (current.after(evening) && current.before(night) || current.equals(morning)){
+	        else if (now.isAfter(LocalTime.parse(evening)) && now.isBefore(LocalTime.parse(night)) || now.equals(morning)){
 	            ress = res.getString("evening");
 	            log.info(ress);
 	            return ress;
@@ -61,22 +50,3 @@ public class Event {
 	        return ress;
 	     }
 }
-	enum BorderEvent {
-
-	    MORNING("06:00:00"),
-	    DAY("09:00:00"),
-	    EVENING("19:00:00"),
-	    NIGHT("23:00:00");
-
-	    private final String time;
-
-	    BorderEvent(String time) {
-	        this.time = time;
-	    }
-
-	    @Override
-	    public String toString() {
-	        return time;
-	    }
-	}
-

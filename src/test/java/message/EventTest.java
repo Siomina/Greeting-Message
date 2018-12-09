@@ -16,6 +16,11 @@ public class EventTest {
 	 String ress;
 	 ResourceBundle res = ResourceBundle.getBundle("MessageResource");
 	 private static final Logger log = LogManager.getLogger(EventTest.class.getName());
+	 
+	 private String morning = "06:00";
+	 private String day = "09:00";
+	 private String evening = "19:00";
+	 private String night = "23:00";
 	
 	 @Before
 	     public void beforeTest() {
@@ -29,7 +34,8 @@ public class EventTest {
 		     assertEquals(ress, event.getEvent());
 		     log.info(event.getEvent());
 	     }
-	     
+	    
+	    
 	    @Test
 	    public void testNightSecond()throws ParseException{
 	        event = new Event("05:59:59");
@@ -148,6 +154,7 @@ public class EventTest {
 	        assertEquals(ress, event.getEvent());
 	        log.info(event.getEvent());
 	    }
+	    
 	}
 
 
